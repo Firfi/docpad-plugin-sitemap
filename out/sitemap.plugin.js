@@ -49,12 +49,13 @@ module.exports = function(BasePlugin) {
       docpad.getCollection('html').sortCollection({
         date: 9
       }).forEach(function(document) {
-        var data, _ref, _ref1;
-        if ((document.get('sitemap') === null || document.get('sitemap') !== false) && (document.get('write') === null || document.get('write') !== false) && document.get('ignored') !== true) {
+        var data, enabled, _ref, _ref1, _ref2, _ref3;
+        enabled = (_ref = (_ref1 = document.get('sitemap')) != null ? _ref1 : config.sitemap) != null ? _ref : false;
+        if (enabled && (document.get('write') === null || document.get('write') !== false) && document.get('ignored') !== true) {
           data = {
             url: document.get('url'),
-            changefreq: (_ref = document.get('changefreq')) != null ? _ref : sitemapData.changefreq,
-            priority: (_ref1 = document.get('priority')) != null ? _ref1 : sitemapData.priority
+            changefreq: (_ref2 = document.get('changefreq')) != null ? _ref2 : sitemapData.changefreq,
+            priority: (_ref3 = document.get('priority')) != null ? _ref3 : sitemapData.priority
           };
           docpad.log("debug", data);
           return sitemapData.urls.push(data);

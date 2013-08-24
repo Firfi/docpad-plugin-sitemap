@@ -60,7 +60,8 @@ module.exports = (BasePlugin) ->
 
 			# loop over just the html files in the resulting collection
 			docpad.getCollection('html').sortCollection(date:9).forEach (document) ->
-				if (document.get('sitemap') is null or document.get('sitemap') isnt false) and (document.get('write') is null or document.get('write') isnt false) and document.get('ignored') isnt true
+				enabled = document.get('sitemap') ? config.sitemap ? false
+				if enabled and (document.get('write') is null or document.get('write') isnt false) and document.get('ignored') isnt true
 					# create document's sitemap data
 					data =
 						url: document.get('url')
